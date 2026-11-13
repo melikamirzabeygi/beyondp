@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" data-type="service">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BeyondP Research Studio — Biostatistics & Manuscript Support</title>
+<meta name="description" content="Statistical analysis, study design and manuscript support for health and mental-health researchers. Fixed quotes within 48 hours, remote worldwide.">
+<meta name="page-type" content="service">
+<meta name="site-kind" content="other">
+<meta name="theme-color" content="#0f3d34">
+<meta property="og:title" content="BeyondP Research Studio">
+<meta property="og:description" content="Biostatistics, study design and manuscript support for mental-health researchers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,500;0,600;0,700;1,500&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f6f2;--surface:#ffffff;--ink:#16211f;--muted:#4f5e5a;--line:#e2ddd2;
+  --accent:#17695a;--accent-ink:#0f3d34;--accent-soft:#e6f0ec;--warm:#b5651d;
+  --r:12px;--wrap:1120px;--ease:cubic-bezier(.2,.7,.2,1)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Atkinson Hyperlegible",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Crimson Pro",Georgia,serif;font-weight:600;letter-spacing:-.01em;margin:0}
+a{color:var(--accent)}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+.skip{position:absolute;left:12px;top:-60px;background:var(--ink);color:#fff;padding:10px 14px;border-radius:8px;z-index:100}
+.skip:focus{top:12px}
+:focus-visible{outline:3px solid var(--warm);outline-offset:3px;border-radius:4px}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .3s var(--ease),border-color .3s}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.nav.solid{background:rgba(247,246,242,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font-family:"Crimson Pro",serif;font-weight:700;font-size:22px;color:#fff;text-decoration:none;min-height:44px}
+.logo .mark{width:30px;height:30px;border-radius:50%;border:2px solid currentColor;display:grid;place-items:center;font-size:15px;font-style:italic}
+.nav.solid .logo{color:var(--ink)}
+.nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:0}
+.nav ul a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;color:rgba(255,255,255,.88);text-decoration:none;font-size:15px;position:relative}
+.nav.solid ul a{color:var(--muted)}
+.nav ul a:after{content:"";position:absolute;left:12px;right:12px;bottom:10px;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease)}
+.nav ul a:hover:after{transform:scaleX(1)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;font:700 16px "Atkinson Hyperlegible",sans-serif;text-decoration:none;cursor:pointer;border:2px solid transparent;transition:transform .2s var(--ease),background .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn-primary{background:var(--warm);color:#fff}
+.btn-primary:hover{box-shadow:0 8px 20px rgba(181,101,29,.3)}
+.btn-ghost{border-color:rgba(255,255,255,.75);color:#fff;background:transparent}
+.btn-ghost:hover{background:rgba(255,255,255,.12)}
+.btn-dark{background:var(--accent);color:#fff}
+.btn .arr{transition:transform .2s var(--ease)}
+.btn:hover .arr{transform:translateX(3px)}
+
+/* hero with video */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:radial-gradient(120% 90% at 80% 10%,#1f7a68 0%,#0f3d34 55%,#0a2a24 100%)}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,30,26,.35) 0%,rgba(8,30,26,.55) 45%,rgba(8,30,26,.88) 100%)}
+.hero .wrap{position:relative;width:100%;padding-bottom:9vh;padding-top:120px}
+.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#f3c48f}
+.hero h1{font-size:clamp(40px,6.2vw,80px);line-height:1.02;margin:16px 0 22px;max-width:900px}
+.hero h1 em{font-style:italic;color:#f3c48f}
+.hero .lede{font-size:clamp(17px,1.6vw,20px);color:rgba(255,255,255,.9);max-width:620px;margin:0 0 30px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;border-top:1px solid rgba(255,255,255,.25)}
+.facts div{padding:18px 18px 0 0;font-size:14px;color:rgba(255,255,255,.8)}
+.facts b{display:block;font-family:"Crimson Pro",serif;font-size:28px;color:#fff;font-weight:600;line-height:1.2}
+.vidctl{position:absolute;right:28px;bottom:24px;z-index:2;min-width:44px;min-height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.6);background:rgba(0,0,0,.25);color:#fff;cursor:pointer;font-size:14px}
+[data-enter]>*{opacity:0;transform:translateY(18px);animation:enter .9s var(--ease) forwards}
+[data-enter]>*:nth-child(2){animation-delay:.08s}[data-enter]>*:nth-child(3){animation-delay:.16s}[data-enter]>*:nth-child(4){animation-delay:.24s}[data-enter]>*:nth-child(5){animation-delay:.32s}
+@keyframes enter{to{opacity:1;transform:none}}
+
+/* sections */
+main section{padding:104px 0;border-top:1px solid var(--line)}
+.head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:44px}
+.head h2{font-size:clamp(34px,4vw,52px);line-height:1.05}
+.head p{color:var(--muted);margin:0}
+.kicker{display:block;font:700 13px "Atkinson Hyperlegible";letter-spacing:.14em;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+
+/* services */
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.svc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px;display:flex;flex-direction:column;transition:transform .25s var(--ease),box-shadow .25s,border-color .25s}
+.svc:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(22,33,31,.08);border-color:#cfd9d4}
+.svc .ico{width:44px;height:44px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin-bottom:18px}
+.svc h3{font-size:24px;margin-bottom:4px}
+.price{font-family:"Crimson Pro",serif;font-size:30px;color:var(--accent-ink);font-weight:700;margin:6px 0 14px}
+.price small{font:400 14px "Atkinson Hyperlegible";color:var(--muted)}
+.svc ul{margin:0;padding-left:18px;color:var(--muted);font-size:15.5px}
+.svc li{margin:5px 0}
+.note{font-size:15px;color:var(--muted);margin-top:22px}
+
+/* type moment */
+.moment{background:var(--accent-ink);color:#e9f1ee;border-top:0}
+.moment .big{font-family:"Crimson Pro",serif;font-size:clamp(34px,5vw,68px);line-height:1.12;max-width:980px;margin:0}
+.moment .big span{color:rgba(233,241,238,.28);transition:color .6s var(--ease)}
+.moment .big span.on{color:#fff}
+.moment .big span.hl.on{color:#f3c48f}
+.moment p{margin:28px 0 0;color:rgba(233,241,238,.75);max-width:560px}
+
+/* work */
+.cases{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.case{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px;transition:transform .25s var(--ease),box-shadow .25s}
+.case:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(22,33,31,.07)}
+.case.wide{grid-column:span 2;display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:center}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.case h3{font-size:25px;line-height:1.15;margin-bottom:10px}
+.case p{margin:0;color:var(--muted)}
+.methods{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.methods span{font-size:13px;background:var(--accent-soft);color:var(--accent-ink);padding:5px 10px;border-radius:999px}
+.diagram{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:18px}
+.diagram svg{width:100%;height:auto;display:block}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s;border-top:2px solid var(--ink)}
+.step{padding:24px 22px 0 0}
+.step:before{counter-increment:s;content:"0" counter(s);font-family:"Crimson Pro",serif;font-size:44px;color:var(--accent);font-weight:600;display:block;line-height:1;margin-bottom:12px}
+.step h3{font-size:22px;margin-bottom:6px}
+.step p{margin:0;color:var(--muted);font-size:15.5px}
+
+/* about */
+.about{display:grid;grid-template-columns:1.2fr 1fr;gap:56px}
+.about p{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:14px}
+.about h3{font-size:22px;margin:0 0 4px}
+.about .block+.block{margin-top:28px}
+
+/* faq */
+.faq{max-width:820px}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;min-height:64px;font-weight:700;font-size:18px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";font-size:26px;color:var(--accent);transition:transform .25s var(--ease)}
+details[open] summary:after{transform:rotate(45deg)}
+details p{color:var(--muted);margin:0 0 20px}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1.3fr 1fr;gap:28px}
+form{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px;display:grid;gap:16px}
+label{font-size:15px;font-weight:700;display:block;margin-bottom:6px}
+input,select,textarea{width:100%;min-height:48px;padding:12px 14px;border:1px solid #cfc8bb;border-radius:8px;font:inherit;background:#fff;color:var(--ink)}
+textarea{min-height:130px;resize:vertical}
+.out{display:none;background:var(--accent-soft);border-radius:10px;padding:18px;font-size:15px;white-space:pre-wrap}
+.side{background:var(--accent-ink);color:#e9f1ee;border-radius:var(--r);padding:30px}
+.side h3{font-size:26px;color:#fff;margin-bottom:14px}
+.side p{margin:0 0 18px;color:rgba(233,241,238,.8)}
+.side b{display:block;color:#fff;font-size:17px;word-break:break-all}
+footer{padding:36px 0;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (max-width:960px){
+  .services{grid-template-columns:repeat(2,1fr)}
+  .head,.about,.contact{grid-template-columns:1fr}
+  .steps{grid-template-columns:repeat(2,1fr);row-gap:28px}
+  .case.wide{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .nav ul{display:none}
+  .wrap{padding:0 20px}
+  .services,.cases{grid-template-columns:1fr}
+  .case.wide{grid-column:auto}
+  .steps{grid-template-columns:1fr}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .facts b{font-size:23px}
+  .cta .btn{width:100%}
+  main section{padding:72px 0}
+  .vidctl{right:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  [data-enter]>*{opacity:1;transform:none}
+  .moment .big span{color:#fff}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav"><div class="wrap">
+<a href="#top" class="logo" aria-label="BeyondP Research Studio, home"><span class="mark">p</span>BeyondP</a>
+<nav aria-label="Main"><ul><li><a href="#services">Services</a></li><li><a href="#work">Selected work</a></li><li><a href="#process">Process</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
+<a class="btn btn-primary" href="#contact">Get a quote</a>
+</div></header>
+
+<section class="hero" id="top" aria-label="Introduction">
+<!-- Client video supplied by Melika (Higgsfield). Loads from its online address; bg.mp4 beside this file is the local copy. Falls back to the green gradient if neither loads. -->
+<video id="bgv" autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260815_030633_1712fc71-4979-4e14-98f9-9f95702ab3da.mp4" type="video/mp4"><source src="bg.mp4" type="video/mp4"></video>
+<div class="scrim"></div>
+<div class="wrap" data-enter>
+<div class="eyebrow">Biostatistics · Study design · Manuscript support</div>
+<h1>Statistics and manuscript support for <em>mental-health researchers</em>.</h1>
+<p class="lede">From raw dataset to reviewer-ready paper: rigorous analysis, clear methods, and responses that get past peer review. Fixed quote within 48 hours.</p>
+<div class="cta"><a class="btn btn-primary" href="#contact">Request a free scoping review <span class="arr">→</span></a><a class="btn btn-ghost" href="#services">See prices</a></div>
+<div class="facts">
+<div><b>4 years</b>university research centre</div>
+<div><b>N≈700</b>multicentre registry analysed</div>
+<div><b>SPSS · R · Python</b>analysis stack</div>
+<div><b>48 h</b>to a fixed quote</div>
+</div>
+</div>
+<button class="vidctl" id="vidctl" type="button" aria-label="Pause background video">❚❚</button>
+</section>
+
+<main id="main">
+<section id="services"><div class="wrap">
+<div class="head"><div><span class="kicker">Services</span><h2>Six services, fixed prices</h2></div><p>Every project starts with a free scoping review of your data and aims. You get a written scope and a fixed price before any work begins.</p></div>
+<div class="services">
+<article class="svc"><div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Statistical analysis</h3><div class="price">from $250 <small>per project</small></div>
+<ul><li>Data cleaning and assumption checks</li><li>t-tests, ANOVA/ANCOVA, χ², regression</li><li>Publication-ready tables and figures</li><li>Written Results section</li></ul></article>
+<article class="svc"><div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M7.3 11l9.4-5M7.3 13l9.4 5"/></svg></div><h3>Advanced modelling</h3><div class="price">from $500 <small>per project</small></div>
+<ul><li>Mixed and longitudinal models</li><li>Mediation and moderation</li><li>Machine-learning prediction, properly validated</li><li>Clustering and trajectory analysis</li></ul></article>
+<article class="svc"><div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg></div><h3>Study design & sample size</h3><div class="price">from $100 <small>per consult</small></div>
+<ul><li>Power and sample size, including MCID-based</li><li>Analysis plans for proposals and grants</li><li>Outcome and measure selection</li></ul></article>
+<article class="svc"><div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h12l4 4v12H4z"/><path d="M8 11h8M8 15h5"/></svg></div><h3>Manuscript editing</h3><div class="price">$0.05 <small>per word</small></div>
+<ul><li>Scientific and language editing by a researcher</li><li>CONSORT, STROBE and PRISMA checks</li><li>Vancouver or APA 7 references</li></ul></article>
+<article class="svc"><div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></div><h3>Reviewer response</h3><div class="price">from $200 <small>per round</small></div>
+<ul><li>Point-by-point response letter</li><li>Re-analysis where reviewers ask for it</li><li>Tracked-changes manuscript revision</li></ul></article>
+<article class="svc"><div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg></div><h3>Methods & Results writing</h3><div class="price">from $300 <small>per manuscript</small></div>
+<ul><li>Methods written to reporting standards</li><li>Results that match your tables exactly</li><li>Limitations framed honestly</li></ul></article>
+</div>
+<p class="note">Hourly consulting $40 · Rush delivery under 72 hours +30% · Final price confirmed in your written quote.</p>
+</div></section>
+
+<section class="moment" aria-label="Our approach"><div class="wrap">
+<span class="kicker" style="color:#f3c48f">Why BeyondP</span>
+<p class="big" id="mom"><span>A p-value says an effect is likely real.</span> <span>It does not say it matters to a patient.</span> <span class="hl">We report both.</span></p>
+<p>Effect sizes with confidence intervals, minimal clinically important differences defined up front, and plain-language interpretation in every delivery.</p>
+</div></section>
+
+<section id="work"><div class="wrap">
+<div class="head"><div><span class="kicker">Selected work</span><h2>Recent research projects</h2></div><p>Psychiatric epidemiology, digital health and research methodology. Unpublished studies are summarised to protect their data.</p></div>
+<div class="cases">
+<article class="case wide"><div><span class="tag">Machine learning</span><h3>Predicting functional disability in psychosis</h3><p>Random-forest prediction of WHODAS outcomes with K-means trajectory groups. Led the major-revision response: overfitting diagnostics, cross-validation redesign and sample reconciliation.</p><div class="methods"><span>Random forest</span><span>K-means</span><span>Nested CV</span><span>Python · R</span></div></div>
+<div class="diagram" aria-hidden="true"><svg viewBox="0 0 360 170"><g font-family="Atkinson Hyperlegible,sans-serif" font-size="12" fill="#16211f"><rect x="6" y="64" width="86" height="42" rx="8" fill="#e6f0ec"/><text x="49" y="90" text-anchor="middle">Baseline data</text><rect x="132" y="56" width="96" height="58" rx="8" fill="#17695a"/><text x="180" y="82" text-anchor="middle" fill="#fff">Random</text><text x="180" y="98" text-anchor="middle" fill="#fff">forest</text><rect x="268" y="10" width="86" height="34" rx="8" fill="#fff" stroke="#e2ddd2"/><text x="311" y="31" text-anchor="middle">Train</text><rect x="268" y="68" width="86" height="34" rx="8" fill="#fff" stroke="#e2ddd2"/><text x="311" y="89" text-anchor="middle">Validate</text><rect x="268" y="126" width="86" height="34" rx="8" fill="#fff" stroke="#b5651d"/><text x="311" y="147" text-anchor="middle">Held-out test</text></g><g stroke="#17695a" stroke-width="2" fill="none"><path d="M92 85h40"/><path d="M228 85c20 0 20-58 40-58M228 85h40M228 85c20 0 20 58 40 58"/></g></svg></div></article>
+<article class="case"><span class="tag">Methods review</span><h3>Statistical vs. clinical significance in adolescent digital-depression trials</h3><p>A methodological review of how trials report clinically important change alongside p-values. Under peer review at a Springer Nature journal.</p><div class="methods"><span>MCID</span><span>Effect sizes</span><span>Reporting quality</span></div></article>
+<article class="case"><span class="tag">Wearables</span><h3>Heart-rate variability and movement coupling</h3><p>An end-to-end pipeline on a public ECG and accelerometer dataset: coupling metrics, leave-one-out logistic regression, five figures and a submission-ready manuscript.</p><div class="methods"><span>Signal processing</span><span>LOOCV</span><span>Reproducible code</span></div></article>
+<article class="case"><span class="tag">Registry</span><h3>Multicentre first-episode psychosis registry</h3><p>Quality-of-life, theory-of-mind and religiosity analyses across three sites (N≈700) with a European academic partner; two English manuscripts prepared.</p><div class="methods"><span>Multicentre data</span><span>Regression</span><span>Mediation</span></div></article>
+<article class="case"><span class="tag">Behavioural data</span><h3>Head movement and emotion recognition in high-risk groups</h3><p>Group comparisons of video-derived motion energy and facial emotion recognition across healthy, clinical high-risk and clinical samples.</p><div class="methods"><span>Motion energy analysis</span><span>ANCOVA</span><span>SPSS</span></div></article>
+</div></div></section>
+
+<section id="process"><div class="wrap">
+<div class="head"><div><span class="kicker">Process</span><h2>Four steps from brief to delivery</h2></div><p>Fully remote, in writing, with a fixed price agreed before any work starts.</p></div>
+<div class="steps">
+<div class="step"><h3>Send your brief</h3><p>Aims, a dataset description and your deadline. Share data only after terms are agreed.</p></div>
+<div class="step"><h3>Free scoping & quote</h3><p>Within 48 hours: written scope, timeline and fixed price.</p></div>
+<div class="step"><h3>50% to start</h3><p>Work begins once the first half is paid; the rest is due on delivery.</p></div>
+<div class="step"><h3>Delivery & revision</h3><p>Outputs, code and a plain-language summary. One revision round included.</p></div>
+</div></div></section>
+
+<section id="about"><div class="wrap about">
+<div><span class="kicker">About the studio</span><h2 style="font-size:clamp(34px,4vw,52px);line-height:1.05;margin-bottom:20px">Founded by a research methodologist</h2>
+<p>BeyondP was founded by <b>Melika Mirzabeygi</b>, who spent four years at a university psychosis research centre working on a multicentre first-episode psychosis registry, prediction models and methodological reviews. She is completing an MSc in cognitive psychology at Tehran University of Medical Sciences.</p>
+<p>The name comes from one belief: a result is only useful if it is meaningful, not just significant.</p></div>
+<div><div class="block"><h3>Areas of focus</h3><div class="chips"><span class="chip">Psychosis & schizophrenia</span><span class="chip">Depression & digital interventions</span><span class="chip">Adolescent mental health</span><span class="chip">Wearables & HRV</span><span class="chip">Cognition</span><span class="chip">Health systems research</span><span class="chip">Registries & cohorts</span><span class="chip">Methodological reviews</span></div></div>
+<div class="block"><h3>Tools</h3><div class="chips"><span class="chip">SPSS</span><span class="chip">R</span><span class="chip">Python</span><span class="chip">Excel</span><span class="chip">Zotero · EndNote</span></div></div></div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+<div class="head"><div><span class="kicker">FAQ</span><h2>Common questions</h2></div><p>Anything else? Ask in your brief.</p></div>
+<div class="faq">
+<details><summary>Is my data kept confidential?</summary><p>Yes. Data are used only for your project, never shared, and deleted after delivery on request. An NDA can be signed before you send anything.</p></details>
+<details><summary>Do you write papers for authorship credit?</summary><p>We provide paid analysis and editing support. Authorship or acknowledgement follows ICMJE criteria and is agreed with you up front.</p></details>
+<details><summary>How do I pay?</summary><p>In USDT (stablecoin): 50% upfront and 50% on delivery. Other options can be discussed when quoting.</p></details>
+<details><summary>Where are you based?</summary><p>Tehran (GMT+3:30). We work remotely with clients worldwide and overlap well with European and Asian working hours.</p></details>
+<details><summary>What if a reviewer asks for more analysis later?</summary><p>Follow-up re-analysis for the same manuscript is offered at a reduced rate.</p></details>
+</div></div></section>
+
+<section id="contact"><div class="wrap">
+<div class="head"><div><span class="kicker">Contact</span><h2>Request a quote</h2></div><p>Describe your project. The form prepares a message to send by email or Telegram.</p></div>
+<div class="contact">
+<form id="f" novalidate>
+<div><label for="n">Your name</label><input id="n" autocomplete="name" required></div>
+<div><label for="s">Service</label><select id="s"><option>Statistical analysis</option><option>Advanced modelling</option><option>Study design & sample size</option><option>Manuscript editing</option><option>Reviewer response</option><option>Methods & Results writing</option><option>Not sure yet</option></select></div>
+<div><label for="d">Deadline</label><input id="d" placeholder="e.g. 3 weeks"></div>
+<div><label for="b">Project (aims, design, sample size, software)</label><textarea id="b" required></textarea></div>
+<button class="btn btn-dark" type="submit">Prepare my message <span class="arr">→</span></button>
+<div class="out" id="o" role="status"></div>
+<button class="btn btn-ghost" type="button" id="c" style="display:none;color:var(--accent);border-color:var(--accent)">Copy message</button>
+</form>
+<aside class="side"><h3>Contact directly</h3>
+<p>Email<b>melikamirzabeygi@gmail.com</b></p>
+<p>Telegram<b>@melika_research_bot</b></p>
+<p>Replies within 24 hours on working days.</p></aside>
+</div></div></section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 BeyondP Research Studio</span><span>Biostatistics & manuscript support · Remote worldwide</span></div></footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  function onScroll(){nav.classList.toggle('solid',window.scrollY>window.innerHeight*0.6)}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  var v=document.getElementById('bgv'),ctl=document.getElementById('vidctl');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var srcs=v.querySelectorAll('source');
+  srcs[srcs.length-1].addEventListener('error',function(){v.style.display='none';ctl.style.display='none'});
+  if(reduce){try{v.pause()}catch(e){};ctl.textContent='▶';ctl.setAttribute('aria-label','Play background video')}
+  ctl.addEventListener('click',function(){
+    if(v.paused){v.play().catch(function(){});ctl.textContent='❚❚';ctl.setAttribute('aria-label','Pause background video')}
+    else{v.pause();ctl.textContent='▶';ctl.setAttribute('aria-label','Play background video')}
+  });
+
+  var spans=document.querySelectorAll('#mom span');
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){spans.forEach(function(s,i){setTimeout(function(){s.classList.add('on')},i*450)});io.disconnect()}})},{threshold:.5});
+    io.observe(document.getElementById('mom'));
+  } else spans.forEach(function(s){s.classList.add('on')});
+
+  var msg='';
+  document.getElementById('f').addEventListener('submit',function(e){e.preventDefault();
+    var n=document.getElementById('n'),b=document.getElementById('b');
+    if(!n.value.trim()||!b.value.trim()){(n.value.trim()?b:n).focus();return}
+    msg='Hello BeyondP,\n\nName: '+n.value+'\nService: '+document.getElementById('s').value+'\nDeadline: '+(document.getElementById('d').value||'flexible')+'\n\nProject:\n'+b.value+'\n\nPlease send me a quote.';
+    var o=document.getElementById('o');o.textContent=msg+'\n\nSend to melikamirzabeygi@gmail.com or Telegram @melika_research_bot';o.style.display='block';document.getElementById('c').style.display='inline-flex';});
+  document.getElementById('c').addEventListener('click',function(){var c=this;try{navigator.clipboard.writeText(msg).then(function(){c.textContent='Copied ✓'},function(){c.textContent='Select the text above to copy'})}catch(err){c.textContent='Select the text above to copy'}});
+})();
+</script>
+</body>
+</html>
