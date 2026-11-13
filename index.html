@@ -73,7 +73,7 @@ a{color:var(--accent)}
 @keyframes enter{to{opacity:1;transform:none}}
 
 /* sections */
-main section{padding:104px 0;border-top:1px solid var(--line)}
+main section{padding:104px 0;border-top:1px solid var(--line);scroll-margin-top:72px}
 .head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:44px}
 .head h2{font-size:clamp(34px,4vw,52px);line-height:1.05}
 .head p{color:var(--muted);margin:0}
@@ -147,6 +147,9 @@ textarea{min-height:130px;resize:vertical}
 .side h3{font-size:26px;color:#fff;margin-bottom:14px}
 .side p{margin:0 0 18px;color:rgba(233,241,238,.8)}
 .side b{display:block;color:#fff;font-size:17px;word-break:break-all}
+.clink{color:#f3c48f;text-decoration:underline;text-underline-offset:3px;display:inline-block;min-height:44px;line-height:44px}
+.clink:hover{color:#fff}
+.err{color:#a3341f;font-size:15px}
 footer{padding:36px 0;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
@@ -268,20 +271,20 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </div></div></section>
 
 <section id="contact"><div class="wrap">
-<div class="head"><div><span class="kicker">Contact</span><h2>Request a quote</h2></div><p>Describe your project. The form prepares a message to send by email or Telegram.</p></div>
+<div class="head"><div><span class="kicker">Contact</span><h2>Request a quote</h2></div><p>Describe your project. Your request goes straight to our inbox, and you get a reply within 24 hours on working days.</p></div>
 <div class="contact">
 <form id="f" novalidate>
 <div><label for="n">Your name</label><input id="n" autocomplete="name" required></div>
+<div><label for="em">Your email</label><input id="em" type="email" autocomplete="email" required></div>
 <div><label for="s">Service</label><select id="s"><option>Statistical analysis</option><option>Advanced modelling</option><option>Study design & sample size</option><option>Manuscript editing</option><option>Reviewer response</option><option>Methods & Results writing</option><option>Not sure yet</option></select></div>
 <div><label for="d">Deadline</label><input id="d" placeholder="e.g. 3 weeks"></div>
 <div><label for="b">Project (aims, design, sample size, software)</label><textarea id="b" required></textarea></div>
-<button class="btn btn-dark" type="submit">Prepare my message <span class="arr">→</span></button>
+<button class="btn btn-dark" type="submit" id="sendbtn">Send my request <span class="arr">→</span></button>
 <div class="out" id="o" role="status"></div>
-<button class="btn btn-ghost" type="button" id="c" style="display:none;color:var(--accent);border-color:var(--accent)">Copy message</button>
 </form>
 <aside class="side"><h3>Contact directly</h3>
-<p>Email<b>melikamirzabeygi@gmail.com</b></p>
-<p>Telegram<b>@melika_research_bot</b></p>
+<p>Email<b><a class="clink" href="mailto:melikamirzabeygi@gmail.com?subject=Quote%20request%20-%20BeyondP">melikamirzabeygi@gmail.com</a></b></p>
+<p>Telegram<b><a class="clink" href="https://t.me/melika_research_bot" target="_blank" rel="noopener">@melika_research_bot</a></b></p>
 <p>Replies within 24 hours on working days.</p></aside>
 </div></div></section>
 </main>
@@ -310,13 +313,25 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     io.observe(document.getElementById('mom'));
   } else spans.forEach(function(s){s.classList.add('on')});
 
-  var msg='';
+  var TO='melikamirzabeygi@gmail.com';
   document.getElementById('f').addEventListener('submit',function(e){e.preventDefault();
-    var n=document.getElementById('n'),b=document.getElementById('b');
-    if(!n.value.trim()||!b.value.trim()){(n.value.trim()?b:n).focus();return}
-    msg='Hello BeyondP,\n\nName: '+n.value+'\nService: '+document.getElementById('s').value+'\nDeadline: '+(document.getElementById('d').value||'flexible')+'\n\nProject:\n'+b.value+'\n\nPlease send me a quote.';
-    var o=document.getElementById('o');o.textContent=msg+'\n\nSend to melikamirzabeygi@gmail.com or Telegram @melika_research_bot';o.style.display='block';document.getElementById('c').style.display='inline-flex';});
-  document.getElementById('c').addEventListener('click',function(){var c=this;try{navigator.clipboard.writeText(msg).then(function(){c.textContent='Copied ✓'},function(){c.textContent='Select the text above to copy'})}catch(err){c.textContent='Select the text above to copy'}});
+    var n=document.getElementById('n'),em=document.getElementById('em'),b=document.getElementById('b'),o=document.getElementById('o'),btn=document.getElementById('sendbtn');
+    if(!n.value.trim()){n.focus();return}
+    if(!em.value.trim()||!em.checkValidity()){em.focus();o.style.display='block';o.innerHTML='<span class="err">Please enter a valid email so we can reply.</span>';return}
+    if(!b.value.trim()){b.focus();return}
+    var data={name:n.value,email:em.value,service:document.getElementById('s').value,deadline:document.getElementById('d').value||'flexible',project:b.value,_subject:'New quote request – BeyondP ('+document.getElementById('s').value+')',_template:'table',_captcha:'false'};
+    btn.disabled=true;btn.textContent='Sending…';
+    fetch('https://formsubmit.co/ajax/'+TO,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+    .then(function(r){return r.json()}).then(function(j){
+      if(j&&(j.success===true||j.success==='true')){o.style.display='block';o.textContent='Thank you, '+n.value+'. Your request has been sent. You will receive a reply at '+em.value+' within 24 hours on working days.';document.getElementById('f').reset();btn.textContent='Sent ✓'}
+      else throw new Error('fail')
+    }).catch(function(){
+      var body='Name: '+n.value+'\nEmail: '+em.value+'\nService: '+data.service+'\nDeadline: '+data.deadline+'\n\nProject:\n'+b.value;
+      var href='mailto:'+TO+'?subject='+encodeURIComponent(data._subject)+'&body='+encodeURIComponent(body);
+      o.style.display='block';o.innerHTML='The form could not send right now. <a href="'+href+'">Send it by email instead</a> or message us on <a href="https://t.me/melika_research_bot" target="_blank" rel="noopener">Telegram</a>.';
+      btn.disabled=false;btn.innerHTML='Send my request <span class="arr">→</span>';
+    });
+  });
 })();
 </script>
 </body>
